@@ -1,15 +1,3 @@
-rm(list = setdiff(ls(), lsf.str())[!(setdiff(ls(), lsf.str()) %in% "params")])
-source(here::here("R", "010_paths-and-files.R"))
-source(here::here("R", "020_libraries.R"))
-
-# Import data
-
-cognitiondata <- readRDS(here::here(RDS_path, "020_long_w_weights.rds")) 
-demos <- readRDS(here::here(RDS_path, "020_demos.rds"))
-
-fs::dir_create(Mplus_path, "165_time_metric_linear")
-setwd(here::here(Mplus_path, "165_time_metric_linear"))
-
 mplusdata <- cognitiondata %>% 
   left_join(demos, by = "HRS_ID") %>% 
   tidyr::unite(SECU_R, c("SECU", "STRATUM"), sep = ".", remove = FALSE) %>%
